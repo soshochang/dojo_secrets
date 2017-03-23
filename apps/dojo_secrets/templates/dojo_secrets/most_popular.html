@@ -1,0 +1,25 @@
+<h1>most popular</h1>
+<a href="/home">home</a>
+
+<h3>Secrets</h3>
+{% for s in secrets_and_is_liked %}
+  SecretID: {{s.0.id}}<br>
+  Content: {{s.0.content}}<br>
+  Created At: {{ s.0.created_at }}<br>
+  LikeCount: {{ s.0.likes.all.count }}<br>
+  {% if s.0.creator_id == user_id %}
+    <form action="/delete_secret" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="secret_id" value={{s.0.id}}>
+      <input type="submit" value="Delete">
+    </form>  
+  {% endif %}
+  {% if not s.1 %}
+    <form action="/create_like" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="secret_id" value={{s.0.id}}>
+      <input type="submit" value="Like">
+    </form>  
+  {% endif %}
+  <br>
+{% endfor %}  

@@ -1,0 +1,12 @@
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+Welcome!
+UserID: {{user.id}} <br>
+First Name: {{user.first_name}}<br>
+Last Name: {{user.last_name}}<br>
+Email: {{user.email}}<br>
